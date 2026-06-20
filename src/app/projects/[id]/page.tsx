@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ImageGallery from './ImageGallery'
 import { projects } from '../data'
-import { YouTubeEmbed } from '@next/third-parties/google'
 
 // Static path generation for optimal performance
 export function generateStaticParams() {
@@ -13,11 +12,11 @@ export function generateStaticParams() {
 
 export default function ProjectDetail({ params }: { params: { id: string } }) {
   const project = projects.find(p => p.id === params.id)
-  
+
   if (!project) {
     notFound()
   }
-  
+
   const galleryImages = [
     ...(project.mainImage ? [{
       src: project.mainImage,
@@ -26,47 +25,46 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
     }] : []),
     ...(project.images || [])
   ]
-  
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <Link href="/projects" className="inline-flex items-center mb-8 text-amber-300 hover:underline">
         ← Projects
       </Link>
-      
+
       <div className="card">
         <div className="flex justify-between items-start mb-4">
           <h1 className="text-3xl font-bold text-amber-200">{project.title}</h1>
-          <span className={`text-sm px-2.5 py-1 rounded-xl ${
-            project.status === 'In Progress' 
-              ? 'bg-blue-900/40 text-blue-200' 
+          <span className={`text-sm px-2.5 py-1 rounded-xl ${project.status === 'In Progress'
+              ? 'bg-blue-900/40 text-blue-200'
               : project.status === 'Completed'
-              ? 'bg-green-900/40 text-green-200'
-              : 'bg-amber-900/40 text-amber-200'
-          }`}>
+                ? 'bg-green-900/40 text-green-200'
+                : 'bg-amber-900/40 text-amber-200'
+            }`}>
             {project.status}
           </span>
         </div>
-        
+
         <div className="flex flex-wrap gap-2 mb-6">
           {project.technologies.map((tech) => (
-            <span 
-              key={tech} 
+            <span
+              key={tech}
               className="px-2 py-1 bg-[#849483] text-white text-xs rounded-xl"
             >
               {tech}
             </span>
           ))}
         </div>
-        
+
         <div className="prose prose-invert max-w-none">
           <p className="text-lg text-amber-100/90 mb-6">{project.detailedDescription}</p>
-          
+
           <ul className="text-amber-100/80 list-disc pl-5 space-y-2 mb-6">
             {project.keyPoints.map((point, index) => (
               <li key={index}>{point}</li>
             ))}
           </ul>
-          
+
           {project.publication && (
             <div className="mt-6 p-4 bg-amber-900/20 rounded-xl">
               <h3 className="text-lg text-amber-200 mb-2">Related Publication</h3>
@@ -75,10 +73,10 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
               </p>
               <div className="flex flex-wrap gap-2">
                 {project.articleUrl && (
-                  <a 
-                    href={project.articleUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={project.articleUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-200 hover:bg-amber-500/20 border border-amber-500/20 transition duration-200 hover:scale-105 shadow-sm"
                   >
                     <svg className="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,10 +86,10 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
                   </a>
                 )}
                 {project.pdfUrl && (
-                  <a 
-                    href={project.pdfUrl} 
-                    target="_blank" 
-                    rel="noreferrer" 
+                  <a
+                    href={project.pdfUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-rose-500/10 text-rose-200 hover:bg-rose-500/20 border border-rose-500/20 transition duration-200 hover:scale-105 shadow-sm"
                   >
                     <svg className="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,10 +112,10 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {pub.articleUrl && (
-                      <a 
-                        href={pub.articleUrl} 
-                        target="_blank" 
-                        rel="noreferrer" 
+                      <a
+                        href={pub.articleUrl}
+                        target="_blank"
+                        rel="noreferrer"
                         className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-amber-500/10 text-amber-200 hover:bg-amber-500/20 border border-amber-500/20 transition duration-200 hover:scale-105 shadow-sm"
                       >
                         <svg className="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -127,10 +125,10 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
                       </a>
                     )}
                     {pub.pdfUrl && (
-                      <a 
-                        href={pub.pdfUrl} 
-                        target="_blank" 
-                        rel="noreferrer" 
+                      <a
+                        href={pub.pdfUrl}
+                        target="_blank"
+                        rel="noreferrer"
                         className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-rose-500/10 text-rose-200 hover:bg-rose-500/20 border border-rose-500/20 transition duration-200 hover:scale-105 shadow-sm"
                       >
                         <svg className="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,7 +146,7 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
 
         {project.githubUrl && (
           <div className="flex justify-start mt-8">
-            <a 
+            <a
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
@@ -168,8 +166,15 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.youtubeVideos.map((video, index) => (
                 <div key={index} className="flex flex-col bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-                  <div className="relative aspect-video w-full flex items-center justify-center bg-black">
-                    <YouTubeEmbed videoid={video.id} params="controls=1" />
+                  <div className="relative aspect-video w-full">
+                    <iframe
+                      className="absolute inset-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${video.id}`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
                   <div className="p-4 bg-custom-brown/40 backdrop-blur-sm border-t border-white/5">
                     <p className="text-amber-100/90 text-sm font-sans text-center font-medium">{video.title}</p>
