@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ImageGallery from './ImageGallery'
 import { projects } from '../data'
+import { YouTubeEmbed } from '@next/third-parties/google'
 
 // Static path generation for optimal performance
 export function generateStaticParams() {
@@ -167,15 +168,8 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.youtubeVideos.map((video, index) => (
                 <div key={index} className="flex flex-col bg-white/5 rounded-2xl overflow-hidden border border-white/10">
-                  <div className="relative aspect-video w-full">
-                    <iframe
-                      className="absolute inset-0 w-full h-full"
-                      src={`https://www.youtube.com/embed/${video.id}`}
-                      title={video.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                  <div className="relative aspect-video w-full flex items-center justify-center bg-black">
+                    <YouTubeEmbed videoid={video.id} params="controls=1" />
                   </div>
                   <div className="p-4 bg-custom-brown/40 backdrop-blur-sm border-t border-white/5">
                     <p className="text-amber-100/90 text-sm font-sans text-center font-medium">{video.title}</p>

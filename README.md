@@ -2,7 +2,7 @@
 
 ![Vercel](https://vercelbadge.vercel.app/api/will-d-chen/personal-website?style=for-the-badge)
 
-A high-performance personal website built with speed and minimalism in mind.
+A personal website built with speed and minimalism in mind.
 
 ## Technologies
 
