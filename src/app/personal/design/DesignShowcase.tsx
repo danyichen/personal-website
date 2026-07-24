@@ -87,10 +87,14 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
   )
 
   return (
-    <section ref={sectionRef} id="design" className="scroll-mt-24" onKeyDown={onKeyDown}>
-      <p className="mb-6 text-amber-100/80 italic">
-        Things I&apos;ve drawn in CAD, straight from the source files. Drag to turn any of them
-        over.
+    <section
+      ref={sectionRef}
+      id="design"
+      className="scroll-mt-24"
+      onKeyDown={onKeyDown}
+    >
+      <p className="mb-6 text-center text-amber-100/80 italic">
+        Various designs I&apos;ve drawn and 3D-modeled.
       </p>
 
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_15rem]">
