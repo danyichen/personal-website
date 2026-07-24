@@ -1,3 +1,9 @@
 node_modules
 .next
 out
+scripts/models/.raw
+scripts/models/.venv
+
+# STEP source files — build inputs for the 3D viewer, kept local, never deployed.
+# Re-drop them here to re-run scripts/models/convert.py; the shipped GLBs live in public/models.
+public/design/

@@ -137,7 +137,7 @@ function Footer() {
             © {new Date().getFullYear()} Will Chen
           </p>
           <p className="text-sm text-amber-200/80">
-            Built with Next.js • React • TypeScript • Tailwind CSS
+            Built with Next.js • React • TypeScript • Tailwind CSS • Three.js
           </p>
           <div className="flex space-x-6">
             <a href="https://github.com/will-d-chen" target="_blank" rel="noreferrer" className="text-amber-200/70">GitHub</a>

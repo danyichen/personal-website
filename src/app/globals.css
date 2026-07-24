@@ -28,3 +28,9 @@
     @apply bg-white/5 border border-white/10 rounded-2xl p-6;
   }
 }
+
+/* Now-playing equaliser tick, used in the music track index */
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
