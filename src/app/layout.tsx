@@ -16,7 +16,7 @@ const spectral = Spectral({
 export const metadata: Metadata = {
   title: 'Will Chen',
   description: 'Danyi (Will) Chen | 陈丹颐, PhD student in Mechanical Engineering at Duke University. Researching robotics, focused ultrasound therapy, and surgical training simulators.',
-  metadataBase: new URL('https://will-d-chen.com'),
+  metadataBase: new URL('https://danyichen.com'),
   keywords: ['陈丹颐', 'Danyi Chen', 'Will Chen', 'Duke University', 'PhD', 'Mechanical Engineering', 'robotics', 'focused ultrasound', 'surgical simulators'],
   alternates: {
     canonical: '/',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Danyi (Will) Chen | 陈丹颐 | Robotics Engineer & PhD Student',
     description: 'Danyi (Will) Chen | 陈丹颐, PhD student in Mechanical Engineering at Duke University. Researching robotics, focused ultrasound therapy, and surgical training simulators.',
-    url: 'https://will-d-chen.com',
+    url: 'https://danyichen.com',
     siteName: 'Danyi (Will) Chen',
     locale: 'en_US',
     type: 'website',
@@ -87,7 +87,7 @@ export default function RootLayout({
                   "name": "Wake Forest University"
                 }
               ],
-              "url": "https://will-d-chen.com",
+              "url": "https://danyichen.com",
               "sameAs": [
                 "https://github.com/will-d-chen",
                 "https://www.linkedin.com/in/danyi-chen-878b1b174/",
