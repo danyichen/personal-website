@@ -147,9 +147,18 @@ export function Stage({ intro, places }: { intro: React.ReactNode; places: Place
 
   useEffect(() => {
     // The stage takes the screen above the footer, so the home page doesn't scroll.
-    const on = () => setSize({ W: innerWidth, H: innerHeight - (document.querySelector<HTMLElement>('body > footer')?.offsetHeight ?? 0) })
+    // clientWidth/Height leave out a scrollbar; the footer's height can change once the font loads,
+    // so it is watched too, or the blades (px) and their edges (svg) drift apart.
+    const foot = document.querySelector<HTMLElement>('body > footer')
+    const on = () => setSize((s) => {
+      const W = document.documentElement.clientWidth, H = document.documentElement.clientHeight - (foot?.offsetHeight ?? 0)
+      return s.W === W && s.H === H ? s : { W, H }
+    })
     on(); addEventListener('resize', on)
-    return () => removeEventListener('resize', on)
+    const ro = new ResizeObserver(on)
+    if (foot) ro.observe(foot)
+    document.fonts?.ready.then(on)
+    return () => { removeEventListener('resize', on); ro.disconnect() }
   }, [])
 
   const go = (g: number) => {
@@ -521,7 +530,7 @@ export function Stage({ intro, places }: { intro: React.ReactNode; places: Place
 
       {/* The blades' edges, and what the pointer and keyboard actually press. */}
       {W > 0 && (
-        <svg className="pointer-events-none absolute inset-0 z-40 h-full w-full" viewBox={`0 0 ${W} ${H}`}>
+        <svg className="pointer-events-none absolute inset-0 z-40" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
           {places.map((p, g) => (
             <path
               key={p.id}
