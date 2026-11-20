@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { projects } from './data'
+import { projects } from '../../projects/data'
 
 export default function Projects() {
   return (

@@ -13,6 +13,15 @@ const nextConfig = {
     optimizeCss: false,
     optimizePackageImports: ['react-icons'], // Optimize imports
   },
+  // Old standalone pages now live as sections on the home page.
+  async redirects() {
+    return ['about', 'projects', 'personal', 'contact'].map((s) => ({
+      source: `/${s}`,
+      destination: `/#${s}`,
+      permanent: true,
+      missing: [{ type: 'header', key: 'user-agent', value: '.*(iPhone|Android.*Mobile).*' }], // phones go to /m
+    }))
+  },
   poweredByHeader: false, // Security best practice
   // Modern compression
   compress: true,

@@ -235,15 +235,15 @@ export default function PersonalAudioPlayer() {
 
   return (
     <section aria-label="Music" className="w-full">
-      <p className="mb-6 text-amber-100/80 italic text-center">
+      <p data-peek className="mb-4 italic text-amber-100/80">
         A selection of instrumentals that I&apos;ve made
       </p>
 
       <audio ref={audioRef} src={TRACKS[trackIdx].src} preload="auto" onEnded={() => setIsPlaying(false)} />
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_15rem]">
+      <div className="space-y-4">
         {/* Now playing */}
-        <div className="card relative !p-0 overflow-hidden bg-black/10 flex min-h-[420px] flex-col sm:min-h-[460px] lg:col-start-1 lg:row-start-1">
+        <div data-peek className="card relative !p-0 overflow-hidden bg-black/10 flex aspect-[5/4] flex-col">
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
@@ -331,7 +331,7 @@ export default function PersonalAudioPlayer() {
         {/* Track index */}
         <nav
           aria-label="Tracks"
-          className="flex gap-2 overflow-x-auto pb-1 lg:col-start-2 lg:row-start-1 lg:flex-col lg:overflow-visible lg:pb-0"
+          data-peek className="grid gap-x-4 sm:grid-cols-2"
         >
           {TRACKS.map((track, i) => {
             const selected = i === trackIdx
@@ -343,15 +343,15 @@ export default function PersonalAudioPlayer() {
                 onMouseEnter={() => setHoverIdx(i)}
                 onMouseLeave={() => setHoverIdx(null)}
                 aria-current={selected ? 'true' : undefined}
-                className={`group flex shrink-0 items-center gap-3 px-3 py-2.5 text-left transition-colors lg:w-full ${
+                className={`group flex min-w-0 items-center gap-3 border-b border-l-2 border-b-white/10 px-3 py-2.5 text-left transition-colors ${
                   selected
-                    ? 'bg-amber-200/10 text-amber-200'
-                    : 'text-amber-100/60 hover:bg-white/5 hover:text-amber-100'
+                    ? 'border-l-amber-200 bg-amber-200/10 text-amber-200'
+                    : 'border-l-transparent text-amber-100/70 hover:bg-white/5 hover:text-amber-100'
                 }`}
               >
                 <span
                   className={`font-mono text-[0.65rem] tabular-nums ${
-                    selected ? 'text-amber-200/70' : 'text-amber-100/25'
+                    selected ? 'text-amber-200/70' : 'text-amber-100/40'
                   }`}
                 >
                   {String(i + 1).padStart(2, '0')}

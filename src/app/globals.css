@@ -34,3 +34,42 @@
   0%, 100% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }
 }
+/* Sections drift in as they enter the viewport. Pure CSS: content stays visible
+   without JS, and browsers without scroll timelines just skip the effect. */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(16px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+/* ---------- tokens ---------- */
+:root {
+  --ground: #423C30;
+  --amber: #FDE68A;
+  --sage: #A9B8A8;
+}
+html, body { overflow-x: clip; }
+
+/* ---------- the stage: the ground, then one tone per section, either side of it ---------- */
+:root {
+  --tone-0: #423C30;
+  --tone-1: #4E4737;
+  --tone-2: #3C362C;
+  --tone-3: #4A4334;
+  --tone-4: #534B3B;
+  --tone-5: #463F33;
+}
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: no-preference) {
+  .enter { animation: enter 0.6s 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+/* A page resting in its region shows only what it marks data-peek; the rest fades in as it floods. */
+.peek :has([data-peek]) > :not([data-peek]):not(:has([data-peek])) { opacity: var(--o, 1); }

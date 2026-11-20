@@ -28,7 +28,7 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <Link href="/projects" className="inline-flex items-center mb-8 text-amber-300 hover:underline">
+      <Link href="/#projects" className="inline-flex items-center mb-8 text-amber-300 hover:underline">
         ← Projects
       </Link>
 

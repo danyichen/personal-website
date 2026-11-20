@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Spectral } from 'next/font/google'
-import Link from 'next/link'
+import { Nav, NotHome, OnlyHome } from './client'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -89,7 +89,7 @@ export default function RootLayout({
               ],
               "url": "https://danyichen.com",
               "sameAs": [
-                "https://github.com/will-d-chen",
+                "https://github.com/danyichen",
                 "https://www.linkedin.com/in/danyi-chen-878b1b174/",
                 "https://scholar.google.com/citations?user=_y5PQDYAAAAJ&hl=en&oi=sra"
               ]
@@ -98,9 +98,10 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-custom-brown text-white">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <NotHome><Nav /></NotHome>
+        <main className="relative z-[1]">{children}</main>
+        <NotHome><Footer /></NotHome>
+        <OnlyHome><SlimFooter /></OnlyHome>
         <Analytics />
         <SpeedInsights />
       </body>
@@ -108,22 +109,19 @@ export default function RootLayout({
   )
 }
 
-// Header Component
-function Header() {
+// The home page's footer: one quiet line, so the stage keeps the screen.
+function SlimFooter() {
   return (
-    <header className="sticky top-0 z-10 backdrop-blur-sm bg-custom-brown/80 border-b border-white/10">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center min-h-20 py-2">
-          <nav className="flex flex-wrap justify-center gap-x-4 sm:gap-x-8 md:gap-x-16 gap-y-2 items-center">
-            <Link href="/" className="inline-flex items-center px-1 pt-1 text-base sm:text-lg font-medium hover:text-amber-200">Home</Link>
-            <Link href="/about" className="inline-flex items-center px-1 pt-1 text-base sm:text-lg font-medium hover:text-amber-200">About</Link>
-            <Link href="/projects" className="inline-flex items-center px-1 pt-1 text-base sm:text-lg font-medium hover:text-amber-200">Projects</Link>
-            <Link href="/personal" className="inline-flex items-center px-1 pt-1 text-base sm:text-lg font-medium hover:text-amber-200">Personal</Link>
-            <Link href="/contact" className="inline-flex items-center px-1 pt-1 text-base sm:text-lg font-medium hover:text-amber-200">Contact</Link>
-          </nav>
+    <footer className="bg-custom-brown">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-2.5 text-xs text-amber-200/50 sm:px-6 lg:px-8">
+        <p>© {new Date().getFullYear()} Will Chen</p>
+        <div className="flex gap-5">
+          <a href="https://github.com/danyichen" target="_blank" rel="noreferrer" className="transition-colors hover:text-amber-200">GitHub</a>
+          <a href="https://www.linkedin.com/in/danyi-chen-878b1b174/" target="_blank" rel="noreferrer" className="transition-colors hover:text-amber-200">LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=_y5PQDYAAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="transition-colors hover:text-amber-200">Scholar</a>
         </div>
       </div>
-    </header>
+    </footer>
   )
 }
 
@@ -140,7 +138,7 @@ function Footer() {
             Built with Next.js • React • TypeScript • Tailwind CSS • Three.js
           </p>
           <div className="flex space-x-6">
-            <a href="https://github.com/will-d-chen" target="_blank" rel="noreferrer" className="text-amber-200/70">GitHub</a>
+            <a href="https://github.com/danyichen" target="_blank" rel="noreferrer" className="text-amber-200/70">GitHub</a>
             <a href="https://www.linkedin.com/in/danyi-chen-878b1b174/" target="_blank" rel="noreferrer" className="text-amber-200/70">LinkedIn</a>
             <a href="https://scholar.google.com/citations?user=_y5PQDYAAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="text-amber-200/70">Scholar</a>
           </div>

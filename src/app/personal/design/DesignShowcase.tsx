@@ -93,15 +93,16 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
       className="scroll-mt-24"
       onKeyDown={onKeyDown}
     >
-      <p className="mb-6 text-center text-amber-100/80 italic">
+      <p data-peek className="mb-4 italic text-amber-100/80">
         Various designs I&apos;ve drawn and 3D-modeled.
       </p>
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_15rem]">
+      <div className="space-y-5">
         {/* Stage */}
         <div
           ref={stageRef}
-          className="card relative !p-0 overflow-hidden aspect-[4/3] sm:aspect-[16/10] lg:col-start-1 lg:row-start-1 bg-black/10"
+          data-peek
+          className="card relative !p-0 overflow-hidden aspect-[5/4] bg-black/10"
         >
           {/* studio floor glow */}
           <div
@@ -125,6 +126,12 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
           ) : (
             <div className="absolute inset-0" />
           )}
+
+          {/* the model's name lives in the frame, so the frame reads on its own */}
+          <div className="pointer-events-none absolute left-5 top-4 !rounded-none">
+            <p className="text-xl font-semibold text-amber-200">{model.title}</p>
+            <p className="text-xs tracking-wide text-amber-100/50">{model.category}</p>
+          </div>
 
           <span className="pointer-events-none absolute right-4 top-3 font-mono text-[0.65rem] tracking-widest text-amber-100/30">
             {String(index + 1).padStart(2, '0')} / {String(designModels.length).padStart(2, '0')}
@@ -180,7 +187,8 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
         {/* Index */}
         <nav
           aria-label="Models"
-          className="flex gap-2 overflow-x-auto pb-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:flex-col lg:overflow-visible lg:pb-0"
+          data-peek
+          className="grid gap-x-4 sm:grid-cols-2"
         >
           {designModels.map((entry, i) => {
             const selected = i === index
@@ -192,32 +200,28 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
                 onMouseEnter={() => prefetch(entry.slug)}
                 onFocus={() => prefetch(entry.slug)}
                 aria-current={selected ? 'true' : undefined}
-                className={`group flex shrink-0 items-center gap-3 px-3 py-2 text-left transition-colors lg:w-full ${
+                className={`group flex min-w-0 items-center gap-3 border-b border-l-2 border-b-white/10 px-3 py-2.5 text-left transition-colors ${
                   selected
-                    ? 'bg-amber-200/10 text-amber-200'
-                    : 'text-amber-100/60 hover:bg-white/5 hover:text-amber-100'
+                    ? 'border-l-amber-200 bg-amber-200/10 text-amber-200'
+                    : 'border-l-transparent text-amber-100/70 hover:bg-white/5 hover:text-amber-100'
                 }`}
               >
                 <span
                   className={`font-mono text-[0.65rem] tabular-nums ${
-                    selected ? 'text-amber-200/70' : 'text-amber-100/25'
+                    selected ? 'text-amber-200/70' : 'text-amber-100/40'
                   }`}
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="min-w-0">
-                  <span className="block truncate text-sm font-medium">{entry.title}</span>
-                  <span className="hidden truncate text-xs text-amber-100/40 lg:block">
-                    {entry.category}
-                  </span>
-                </span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium">{entry.title}</span>
+                <span className="text-[0.65rem] text-amber-100/40 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden>{selected ? '●' : 'View'}</span>
               </button>
             )
           })}
         </nav>
 
         {/* Caption */}
-        <div className="lg:col-start-1 lg:row-start-2">
+        <div>
           <AnimatePresence mode="wait">
             <motion.div
               key={model.slug}
@@ -226,13 +230,8 @@ export default function DesignShowcase({ visible = true }: { visible?: boolean }
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.22, ease: 'easeOut' }}
             >
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 className="text-xl font-bold text-amber-200">{model.title}</h3>
-                <span className="text-[0.7rem] uppercase tracking-[0.18em] text-amber-100/45">
-                  {model.category}
-                </span>
-              </div>
-              <p className="mt-2 max-w-2xl text-amber-100/70">{model.description}</p>
+              <h3 className="sr-only">{model.title}</h3>
+              <p className="max-w-2xl text-amber-100/70">{model.description}</p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 <span className="rounded-xl border border-white/10 px-2 py-1 text-xs text-amber-100/50">
                   {model.parts} {model.parts === 1 ? 'body' : 'bodies'}

@@ -251,6 +251,7 @@ export default function ModelStage({
   return (
     <Canvas
       frameloop={active ? 'always' : 'demand'}
+      resize={{ offsetSize: true }} // measure the layout box, so a scaled-down preview still fills its frame
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       camera={{ fov: 34, position: [2.6, 1.5, 3.4] }}

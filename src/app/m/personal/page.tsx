@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const PersonalTabs = dynamic(() => import('./PersonalTabs'));
+const PersonalTabs = dynamic(() => import('../../personal/PersonalTabs'));
 
 export default function Personal() {
   return (

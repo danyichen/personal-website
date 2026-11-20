@@ -28,7 +28,7 @@ export default function Contact() {
               <a href="https://www.linkedin.com/in/danyi-chen-878b1b174/" target="_blank" rel="noreferrer" className="text-amber-300">
                 LinkedIn
               </a>
-              <a href="https://github.com/will-d-chen" target="_blank" rel="noreferrer" className="text-amber-300">
+              <a href="https://github.com/danyichen" target="_blank" rel="noreferrer" className="text-amber-300">
                 GitHub
               </a>
               <a href="https://scholar.google.com/citations?user=_y5PQDYAAAAJ&hl=en&oi=sra" target="_blank" rel="noreferrer" className="text-amber-300">
